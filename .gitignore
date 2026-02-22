@@ -1,0 +1,14 @@
+# Environment variables with secrets
+srcs/.env
+
+# System files
+.DS_Store
+.vscode/
+*.swp
+*.swo
+
+# Docker
+.docker/
+
+# Logs
+*.log
