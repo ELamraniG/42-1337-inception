@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#add second user later
 set -e
 
 echo "wait for maria"
