@@ -9,7 +9,7 @@ while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${W
 done
 echo "maria is good"
 
-# Download WordPress if not exists
+# Download if not exists
 if [ ! -f /var/www/html/wp-config.php ]; then
     echo "Downloading WordPress..."
     wp core download --allow-root
