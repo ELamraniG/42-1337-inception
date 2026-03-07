@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #if any command fails , exit
-    set -e
+set -e
 
 # mysqld but safe automaticall restart if fail
 # no connection outside of the contaniner can connect for now
@@ -14,9 +14,10 @@ echo "wait"
 while ! mysqladmin ping -u root; do
     sleep 1
 done
-
+# % means any host
 echo "creating user and database"
 mysql -u root <<lopo
+
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';
