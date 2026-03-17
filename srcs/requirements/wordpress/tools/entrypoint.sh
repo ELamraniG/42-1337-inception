@@ -1,18 +1,19 @@
 #!/bin/bash
-#add second user later
 set -e
 
 echo "wait for maria"
-while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}" 2>/dev/null; do
+while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent 2>/dev/null; do
     echo "waiting for maria"
     sleep 2
 done
 echo "maria is good"
 
-# Download if not exists
-if [ ! -f /var/www/html/wp-config.php ]; then
+if [ ! -f /var/www/html/wp-login.php ]; then
     echo "wp not installed, installing"
     wp core download --allow-root
+fi
+
+if [ ! -f /var/www/html/wp-config.php ]; then
     wp config create --allow-root \
         --dbname="${WORDPRESS_DB_NAME}" \
         --dbuser="${WORDPRESS_DB_USER}" \
@@ -24,5 +25,6 @@ if [ ! -f /var/www/html/wp-config.php ]; then
         --admin_user="${WP_ADMIN_USER}" \
         --admin_password="${WP_ADMIN_PASSWORD}" \
         --admin_email="${WP_ADMIN_EMAIL}"
+fi
 
-exec php-fpm
+exec php-fpm8.2 -F

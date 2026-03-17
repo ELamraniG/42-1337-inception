@@ -3,24 +3,19 @@ version: '3.8'
 services:
   mariadb:
     build:
-      context: ./requirements/mariadb
+      context: ./srcs/requirements/mariadb
     container_name: mariadb
-    environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${MYSQL_DATABASE}
-      MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+      - .env
     volumes:
       - mariadb_data:/var/lib/mysql
     networks:
       - inception
     restart: always
-    env_file:
-  - .env
 
   nginx:
     build:
-      context: ./requirements/nginx
+      context: ./srcs/requirements/nginx
     container_name: nginx
     ports:
       - "443:443"
@@ -34,13 +29,10 @@ services:
 
   wordpress:
     build:
-      context: ./requirements/wordpress
+      context: ./srcs/requirements/wordpress
     container_name: wordpress
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
-      WORDPRESS_DB_USER: ${MYSQL_USER}
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
+    env_file:
+      - .env
     volumes:
       - wordpress_data:/var/www/html
     depends_on:
