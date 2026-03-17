@@ -1,8 +1,6 @@
 #!/bin/bash
-
 set -e
-
-mysqld --skip-networking --user=mysql &
+mysqld --skip-networking --skip-grant-tables --user=mysql &
 MYSQLD_PID=$!
 
 echo "Waiting for MariaDB to start..."
@@ -12,6 +10,7 @@ done
 
 echo "Creating user and database..."
 mysql -u root <<EOF
+FLUSH PRIVILEGES;
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
 GRANT ALL PRIVILEGES ON \`${MYSQL_DATABASE}\`.* TO '${MYSQL_USER}'@'%';

@@ -3,22 +3,24 @@
 all: build up
 
 build:
-	docker-compose  build
+	sudo mkdir -p /home/roote/data/mariadb /home/roote/data/wordpress
+	sudo docker compose -f srcs/docker-compose.yml build
 
 up:
-	docker-compose -d
+	sudo docker compose -f srcs/docker-compose.yml up -d
 
 down:
-	docker-compose  down
+	sudo docker compose -f srcs/docker-compose.yml down
 
 clean: down
-	docker system prune -f
+	sudo docker system prune -f
 
 fclean: clean
-	docker system prune -af
-	docker volume prune -f
-
+	sudo docker system prune -af
+	sudo docker volume prune -f
+	sudo rm -rf /home/roote/data/mariadb /home/roote/data/wordpress
+	
 re: fclean all
 
 logs:
-	docker-compose -f
+	sudo docker compose -f srcs/docker-compose.yml logs -f
