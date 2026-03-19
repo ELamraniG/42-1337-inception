@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 mysqld --skip-networking --skip-grant-tables --user=mysql &
-MYSQLD_PID=$!
 
 echo "Waiting for MariaDB to start..."
 while ! mysqladmin ping --silent 2>/dev/null; do
@@ -20,6 +19,6 @@ EOF
 
 mysqladmin -u root -p"${MYSQL_ROOT_PASSWORD}" shutdown
 
-wait $MYSQLD_PID
+wait
 
 exec mysqld_safe --user=mysql
