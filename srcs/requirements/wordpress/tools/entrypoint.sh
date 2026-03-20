@@ -1,16 +1,12 @@
 #!/bin/bash
 set -e
 
-echo "wait for maria"
+echo "waiting for mariadb"
 while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent 2>/dev/null; do
-    echo "waiting for maria"
     sleep 2
 done
-echo "maria is good"
-
 
 if [ ! -f "/var/www/html/wp-config.php" ]; then
-    echo "wp not installed, installing"
     wp core download --allow-root --path="/var/www/html"
 
     wp config create --allow-root \
@@ -30,6 +26,11 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
         "${WP_USER}" "${WP_USER_EMAIL}" \
         --user_pass="${WP_USER_PASSWORD}" \
         --role=editor
+
+    wp plugin install redis-cache --activate --allow-root
+    wp config set WP_REDIS_HOST redis --type=constant --allow-root
+    wp config set WP_REDIS_PORT 6379 --raw --type=constant --allow-root
+    wp redis enable --allow-root || true
 fi
 
 exec php-fpm8.2 -F

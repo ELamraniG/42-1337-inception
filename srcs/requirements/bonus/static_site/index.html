@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inception</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #413e3e;
+            margin: 0;
+            padding: 20px;
+        }
+
+        #container {
+            margin: 0 auto;
+            background-color: #fababa;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(135, 123, 200, 0.1);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        h1 {
+            color: #333;
+            transition: color 0.3s;
+        }
+
+        p {
+            color: #bf7676;
+            transition: color 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <h1 id="iam">WELCOME TO MY SITE</h1>
+        <p id="lorem">I AM EL AMRANI MOHAMED A STUDENT AT 1337</p>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque asperiores tempora modi suscipit incidunt
+            ducimus neque voluptatibus commodi excepturi amet. Dolorem autem aspernatur dolores nihil quos architecto
+            nobis minus velit.</p>
+    </div>
+
+    <script>
+        const cont = document.getElementById('container');
+        const iam = document.getElementById('iam');
+        const lorem = document.getElementById('lorem');
+
+        cont.addEventListener('mouseover', () => {
+            cont.style.backgroundColor = '#2e4057';
+            iam.style.color = '#fababa';
+            lorem.style.color = '#a8d8ea';
+        });
+
+        cont.addEventListener('mouseout', () => {
+            cont.style.backgroundColor = '#fababa';
+            iam.style.color = '#333';
+            lorem.style.color = '#bf7676';
+        });
+    </script>
+</body>
+
+</html>

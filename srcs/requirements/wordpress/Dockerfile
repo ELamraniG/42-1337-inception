@@ -3,6 +3,7 @@ FROM debian:bookworm
 RUN apt-get update && apt-get install -y \
     php8.2-fpm \
     php-mysql \
+    php-redis \
     php-gd \
     php-zip \
     curl \
