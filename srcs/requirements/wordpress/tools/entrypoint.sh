@@ -29,7 +29,7 @@ if [ ! -f "/var/www/html/wp-config.php" ]; then
     wp user create --allow-root \
         "${WP_USER}" "${WP_USER_EMAIL}" \
         --user_pass="${WP_USER_PASSWORD}" \
-        --role=author
+        --role=editor
 fi
 
 exec php-fpm8.2 -F
