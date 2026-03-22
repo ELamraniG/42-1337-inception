@@ -3,7 +3,7 @@
 all: build up
 
 build:
-	sudo mkdir -p /home/roote/data/mariadb /home/roote/data/wordpress
+	sudo mkdir -p /home/moel-amr/data/mariadb /home/moel-amr/data/wordpress
 	sudo docker compose -f srcs/docker-compose.yml build
 
 up:
@@ -18,7 +18,7 @@ clean: down
 fclean: clean
 	sudo docker system prune -af
 	sudo docker volume prune -f
-	sudo rm -rf /home/roote/data/mariadb /home/roote/data/wordpress
+	sudo rm -rf /home/moel-amr/data/mariadb /home/moel-amr/data/wordpress
 	
 re: fclean all
 

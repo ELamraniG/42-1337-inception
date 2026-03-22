@@ -2,6 +2,7 @@ services:
   mariadb:
     build:
       context: ./requirements/mariadb
+    image: mariadb
     container_name: mariadb
     env_file:
       - .env
@@ -14,6 +15,7 @@ services:
   wordpress:
     build:
       context: ./requirements/wordpress
+    image: wordpress
     container_name: wordpress
     env_file:
       - .env
@@ -29,15 +31,34 @@ services:
   redis:
     build:
       context: ./requirements/bonus/redis
+    image: redis
     container_name: redis
     networks:
       - inception
     restart: always
 
-    
+  ftp:
+    build:
+      context: ./requirements/bonus/ftp
+    image: ftp
+    container_name: ftp
+    env_file:
+      - .env
+    ports:
+      - "21:21"
+      - "50000-50010:50000-50010"
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - wordpress
+    networks:
+      - inception
+    restart: always
+
   adminer:
     build:
       context: ./requirements/bonus/adminer
+    image: adminer
     container_name: adminer
     depends_on:
       - mariadb
@@ -48,16 +69,16 @@ services:
   static_site:
     build:
       context: ./requirements/bonus/static_site
+    image: static_site
     container_name: static_site
     networks:
       - inception
     restart: always
-    depends_on:
-      - nginx
 
   nginx:
     build:
       context: ./requirements/nginx
+    image: nginx
     container_name: nginx
     env_file:
       - .env
@@ -78,14 +99,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /home/roote/data/mariadb
+      device: /home/moel-amr/data/mariadb
   wordpress_data:
     name: inception_wordpress_data
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/roote/data/wordpress
+      device: /home/moel-amr/data/wordpress
 
 networks:
   inception:

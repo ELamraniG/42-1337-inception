@@ -1,5 +1,5 @@
 # Environment variables with secrets
-srcs/.env
+# srcs/.env
 
 # System files
 .DS_Store
