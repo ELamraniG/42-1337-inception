@@ -97,8 +97,6 @@ WordPress files and the MariaDB database are stored on the host machine at:
 /home/moel-amr/data/wordpress/
 ```
 
-These are bind-mounted named volumes. To reset data completely:
-
 ```bash
 make fclean
 ```

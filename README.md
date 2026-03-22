@@ -19,9 +19,6 @@ Environment variables are simple key-value pairs passed to containers at runtime
 **Docker Network vs Host Network**
 Host network mode makes the container share the host's network stack directly — no isolation. Docker bridge network creates a private internal network where containers communicate by name. This project uses a custom bridge network called `inception` so containers can talk to each other securely without exposing unnecessary ports to the host.
 
-**Docker Volumes vs Bind Mounts**
-Bind mounts link a host directory directly into the container. Named volumes are managed by Docker and are more portable. This project uses named volumes with bind mount driver options so data is stored at `/home/moel-amr/data/` on the host, satisfying both the subject requirement and keeping data persistent across restarts.
-
 ## Instructions
 
 ### Requirements
