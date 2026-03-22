@@ -66,6 +66,19 @@ services:
       - inception
     restart: always
 
+  glances:
+    build:
+      context: ./requirements/bonus/glances
+    image: glances
+    container_name: glances
+    ports:
+      - "61208:61208"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - inception
+    restart: always
+
   static_site:
     build:
       context: ./requirements/bonus/static_site
