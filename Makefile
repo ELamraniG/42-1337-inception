@@ -16,6 +16,7 @@ clean: down
 	sudo docker system prune -f
 
 fclean: clean
+	sudo docker compose -f srcs/docker-compose.yml down -v
 	sudo docker system prune -af
 	sudo docker volume prune -f
 	sudo rm -rf /home/moel-amr/data/mariadb /home/moel-amr/data/wordpress

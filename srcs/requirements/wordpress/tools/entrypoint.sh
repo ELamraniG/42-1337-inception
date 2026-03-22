@@ -2,7 +2,7 @@
 set -e
 
 echo "waiting for mariadb"
-while ! mysqladmin ping -h"${WORDPRESS_DB_HOST}" --silent 2>/dev/null; do
+while ! mysqladmin ping -P3306 -h"${WORDPRESS_DB_HOST}" -u"${WORDPRESS_DB_USER}" -p"${WORDPRESS_DB_PASSWORD}"; do
     sleep 2
 done
 
