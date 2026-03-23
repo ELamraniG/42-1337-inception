@@ -5,7 +5,7 @@ FLAG=/var/lib/mysql/.initialized
 
 if [ ! -f "${FLAG}" ]; then
     mysql_install_db --user=mysql --datadir=/var/lib/mysql
-    mysqld --user=mysql --bootstrap 2>&1 <<EOF
+    mysqld --user=mysql --bootstrap <<EOF
 FLUSH PRIVILEGES;
 CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE}\`;
 CREATE USER IF NOT EXISTS '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';
