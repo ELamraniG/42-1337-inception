@@ -1,14 +1,7 @@
-# Environment variables with secrets
-# srcs/.env
-
-# System files
+srcs/.env
 .DS_Store
 .vscode/
 *.swp
 *.swo
-
-# Docker
 .docker/
-
-# Logs
 *.log

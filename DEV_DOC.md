@@ -14,7 +14,8 @@
 2. Create `srcs/.env` with the following variables:
 
 ```env
-DOMAIN_NAME=moel-amr.42.fr
+Change the values to whatever you like
+DOMAIN_NAME=example.com
 
 MYSQL_DATABASE=wordpress
 MYSQL_USER=your_db_user
